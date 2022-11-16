@@ -11,6 +11,7 @@ module.exports = {
   mode: 'none',
   module: {
     rules: [
+      // 여기부터=> resource(이미지, 텍스트 파일) 관련
       // {
       //   test: /\.(ttf)$/,
       //   type: 'asset/resource',
@@ -35,6 +36,12 @@ module.exports = {
       {
         test: /\.txt/,
         type: 'asset/source',
+      },
+      // 여기까지=> resource(이미지, 텍스트 파일) 관련,
+      //css loader
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },
