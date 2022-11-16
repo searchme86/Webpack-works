@@ -51,7 +51,7 @@ module.exports = {
       // npm install @babel/core babel-loader @babel/preset-env @babel/plugin-proposal-class-properties --save-dev
       {
         test: /\.js$/,
-        exlcude: /node_modules/,
+        exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
