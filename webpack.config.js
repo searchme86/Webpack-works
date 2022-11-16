@@ -1,6 +1,7 @@
 const path = require('path');
 // TerserPlugin : minifying bundling size
 const TerserPlugin = require('terser-webpack-plugin');
+// MiniCssExtractPlugin: generating a style file in dist
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
@@ -73,6 +74,7 @@ module.exports = {
       },
     ],
   },
+  // npm install mini-css-extract-plugin --save-dev
   plugins: [
     new TerserPlugin(),
     new MiniCssExtractPlugin({
