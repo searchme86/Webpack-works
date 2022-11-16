@@ -6,6 +6,4 @@
 
 # Branch Detail
 
-## webpackBasic
-
-#### webpack Basic을 연습한 코드
+- webpackBasic : webpack Basic을 연습한 코드
