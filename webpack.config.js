@@ -1,4 +1,8 @@
 const path = require('path');
+// TerserPlugin : minifying bundling size
+const TerserPlugin = require('terser-webpack-plugin');
+// MiniCssExtractPlugin: generating a style file in dist
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   entry: './src/index.js',
@@ -38,11 +42,43 @@ module.exports = {
         type: 'asset/source',
       },
       // 여기까지=> resource(이미지, 텍스트 파일) 관련,
-      //css loader
+      // 여기부터 스타일 loader
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      },
+      // {
+      //   test: /\.css$/,
+      //   use: ['style-loader', 'css-loader'],
+      // },
+      {
+        test: /\.scss$/,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+      },
+      // {
+      //   test: /\.scss$/,
+      //   use: ['style-loader', 'css-loader', 'sass-loader'],
+      // },
+      // 여기까지 스타일 loader
+      // npm install @babel/core babel-loader @babel/preset-env @babel/plugin-proposal-class-properties --save-dev
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/env'],
+            plugins: ['@babel/plugin-proposal-class-properties'],
+          },
+        },
       },
     ],
   },
+  // npm install mini-css-extract-plugin --save-dev
+  plugins: [
+    new TerserPlugin(),
+    new MiniCssExtractPlugin({
+      filename: 'style.css',
+    }),
+  ],
 };
