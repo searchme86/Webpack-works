@@ -1,6 +1,4 @@
 const path = require('path');
-// TerserPlugin : minifying bundling size
-const TerserPlugin = require('terser-webpack-plugin');
 // MiniCssExtractPlugin: generating a style file in dist
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // keep recent data of dist
@@ -25,7 +23,7 @@ module.exports = {
     //   keep: /\.css/,
     // },
   },
-  mode: 'none',
+  mode: 'production',
   module: {
     rules: [
       // 여기부터=> resource(이미지, 텍스트 파일) 관련
@@ -98,7 +96,6 @@ module.exports = {
   // npm install handlebars-loader --save-dev
   // npm install handlebars --save-dev
   plugins: [
-    new TerserPlugin(),
     new MiniCssExtractPlugin({
       // filename: 'style.css',
       filename: 'style.[contenthash].css',
