@@ -3,14 +3,27 @@ const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
 // MiniCssExtractPlugin: generating a style file in dist
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// keep recent data of dist
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+// generate new html by new bundle
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
   output: {
-    filename: 'bundle.js',
+    // filename: 'bundle.js',
+    // browser chaching works
+    filename: 'bundle.[contenthash].js',
     // path: './dist',
     path: path.resolve(__dirname, './dist'),
-    publicPath: 'dist/',
+    // --htmlWepackPlugin--
+    // publicPath: 'dist/',
+    publicPath: '',
+
+    // clean: {
+    //   dry: true,
+    //   keep: /\.css/,
+    // },
   },
   mode: 'none',
   module: {
@@ -72,13 +85,29 @@ module.exports = {
           },
         },
       },
+      // hbs rule
+      {
+        test: /\.hbs$/,
+        use: ['handlebars-loader'],
+      },
     ],
   },
   // npm install mini-css-extract-plugin --save-dev
+  // npm install clean-webpack-plugin --save-dev
+  // npm install html-webpack-plugin --save-dev
+  // npm install handlebars-loader --save-dev
+  // npm install handlebars --save-dev
   plugins: [
     new TerserPlugin(),
     new MiniCssExtractPlugin({
-      filename: 'style.css',
+      // filename: 'style.css',
+      filename: 'style.[contenthash].css',
+    }),
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      title: 'Hello world',
+      template: 'src/index.hbs',
+      description: 'Some description',
     }),
   ],
 };
