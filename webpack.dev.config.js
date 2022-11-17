@@ -5,11 +5,16 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  // entry: './src/index.js',
+  entry: {
+    'hello-world': './src/hello-world.js',
+    kiwi: './src/kiwi.js',
+  },
   output: {
     // filename: 'bundle.js',
     // browser chaching works
-    filename: 'bundle.js',
+    // filename: 'bundle.js',
+    filename: '[name].bundle.js',
     // path: './dist',
     path: path.resolve(__dirname, './dist'),
     // --htmlWepackPlugin--
@@ -98,9 +103,33 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
+      // 별도 파일을 만들기 위해, filename에 특정 이름을 입력함
+      filename: 'hello-world.html',
+      // webpack에게 특정파일에 해당한 속성을 집어넣을 수 있도록 chunk 옵션을 넣음
+      // chunk name은 entry에 텍스트를 가져다 씀
+      // entry: {
+      //   'hello-world': './src/hello-world.js',
+      //   kiwi: './src/kiwi.js',
+      // },
+      chunks: ['hello-world'],
       title: 'Hello world',
-      template: 'src/index.hbs',
-      description: 'Some description',
+      template: 'src/page-template.hbs',
+      description: 'Hello world',
+    }),
+    // 별도의 html이 설정되도록 새로운 HtmlWebpackPlugin 인스턴스를 생성
+    new HtmlWebpackPlugin({
+      // 별도 파일을 만들기 위해, filename에 특정 이름을 입력함
+      filename: 'kiwi.html',
+      // webpack에게 특정파일에 해당한 속성을 집어넣을 수 있도록 chunk 옵션을 넣음
+      // chunk name은 entry에 텍스트를 가져다 씀
+      // entry: {
+      //   'hello-world': './src/hello-world.js',
+      //   kiwi: './src/kiwi.js',
+      // },
+      chunks: ['kiwi'],
+      title: 'Kiwi',
+      template: 'src/page-template.hbs',
+      description: 'Kiwi',
     }),
   ],
 };
