@@ -29,6 +29,16 @@ module.exports = {
     // },
   },
   mode: 'production',
+  optimization: {
+    // 외부 라이브러리(예: lodash)를 Import 할 경우, bundle 파일의 사이즈가 증가함
+    // 외부 라이브러리로 인한 번들 사이즈를 줄이기위한 기능
+    splitChunks: {
+      // 라이브러리를 import한 모든 파일을 가리키는 설정
+      chunks: 'all',
+      // 최소 사이즈가 넘을 경우, 번들 사이즈를 줄일 지를 설정
+      minSize: 3000,
+    },
+  },
   module: {
     rules: [
       // 여기부터=> resource(이미지, 텍스트 파일) 관련
