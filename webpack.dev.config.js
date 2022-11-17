@@ -22,6 +22,16 @@ module.exports = {
     // },
   },
   mode: 'development',
+  devServer: {
+    port: 9000,
+    static: {
+      directory: path.resolve(__dirname, './dist'),
+    },
+    devMiddleware: {
+      index: 'index.html',
+      writeToDisk: true,
+    },
+  },
   module: {
     rules: [
       // 여기부터=> resource(이미지, 텍스트 파일) 관련
