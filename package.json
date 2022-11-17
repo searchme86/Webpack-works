@@ -4,7 +4,8 @@
   "description": "# Introduce",
   "main": "index.js",
   "scripts": {
-    "build": "webpack"
+    "build": "webpack --config webpack.pro.config.js",
+    "dev": "webpack --config webpack.dev.config.js"
   },
   "repository": {
     "type": "git",
