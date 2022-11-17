@@ -5,6 +5,8 @@ const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // keep recent data of dist
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+// generate new html by new bundle
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
@@ -14,7 +16,10 @@ module.exports = {
     filename: 'bundle.[contenthash].js',
     // path: './dist',
     path: path.resolve(__dirname, './dist'),
-    publicPath: 'dist/',
+    // --htmlWepackPlugin--
+    // publicPath: 'dist/',
+    publicPath: '',
+
     // clean: {
     //   dry: true,
     //   keep: /\.css/,
@@ -80,10 +85,18 @@ module.exports = {
           },
         },
       },
+      // hbs rule
+      {
+        test: /\.hbs$/,
+        use: ['handlebars-loader'],
+      },
     ],
   },
   // npm install mini-css-extract-plugin --save-dev
   // npm install clean-webpack-plugin --save-dev
+  // npm install html-webpack-plugin --save-dev
+  // npm install handlebars-loader --save-dev
+  // npm install handlebars --save-dev
   plugins: [
     new TerserPlugin(),
     new MiniCssExtractPlugin({
@@ -91,5 +104,10 @@ module.exports = {
       filename: 'style.[contenthash].css',
     }),
     new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      title: 'Hello world',
+      template: 'src/index.hbs',
+      description: 'Some description',
+    }),
   ],
 };
