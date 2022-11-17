@@ -1,6 +1,7 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { ModuleFederationPlugin } = require('webpack').container;
 
 module.exports = {
   entry: './src/kiwi.js',
@@ -58,6 +59,12 @@ module.exports = {
       title: 'kiwi',
       template: 'src/page-template.hbs',
       description: 'kiwi',
+    }),
+    new ModuleFederationPlugin({
+      name: 'kiwiApp',
+      remotes: {
+        HelloWorldApp: 'HelloWorldApp@http://localhost:9001/remoteEntry.js',
+      },
     }),
   ],
 };
