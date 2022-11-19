@@ -1,5 +1,7 @@
+import _ from 'lodash';
+
 export function add(x: number, y: number) {
-  return x + y;
+  return _.add(x, y);
 }
 export function multiply(x: number, y: number) {
   return x * y;
