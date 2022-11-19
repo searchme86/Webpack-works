@@ -6,6 +6,10 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.(png|jpg)$/,
+        type: 'asset',
+      },
+      {
         test: /\.ts?$/,
         use: 'ts-loader',
         exclude: /node_modules/,
