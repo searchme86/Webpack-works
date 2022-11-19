@@ -1,4 +1,4 @@
-import Dog from './Dog.js';
+import Dog from './Dog';
 
 class ShelterDog extends Dog {
   constructor(
