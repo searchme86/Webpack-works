@@ -1,6 +1,6 @@
-import Dog from './Dog.js';
-import ShelterDog from './ShelterDog.js';
-import { add, multiply, divide } from './utils.js';
+import Dog from './Dog';
+import ShelterDog from './ShelterDog';
+import { add, multiply, divide } from './utils';
 
 console.log('from index files');
 
