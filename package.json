@@ -4,9 +4,8 @@
   "description": "# Introduce",
   "main": "index.js",
   "scripts": {
-    "start": "lite-server",
     "serve": "webpack-dev-server",
-    "build": "webpack"
+    "build": "webpack --config webpack.prod.js"
   },
   "repository": {
     "type": "git",
