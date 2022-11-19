@@ -4,8 +4,8 @@
   "description": "# Introduce",
   "main": "index.js",
   "scripts": {
-    "serve": "webpack-dev-server",
-    "build": "webpack --config webpack.prod.js"
+    "lite": "lite-server",
+    "dev": "webpack --config webpack.dev.js"
   },
   "repository": {
     "type": "git",
@@ -20,8 +20,10 @@
   "homepage": "https://github.com/searchme86/Webpack-works#readme",
   "devDependencies": {
     "@types/lodash": "^4.14.189",
+    "css-loader": "^6.7.2",
     "lite-server": "^2.6.1",
     "lodash": "^4.17.21",
+    "style-loader": "^3.3.1",
     "ts-loader": "^9.4.1",
     "typescript": "^4.9.3",
     "webpack": "^5.75.0",
