@@ -17,7 +17,7 @@ module.exports = {
     // publicPath: '/dist',
   },
   resolve: {
-    extensions: ['.ts', '.js'],
+    extensions: ['.ts', '.js', 'scss'],
   },
   module: {
     rules: [

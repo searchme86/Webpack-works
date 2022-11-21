@@ -6,14 +6,18 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = {
   mode: 'development',
   devtool: 'inline-source-map',
-  entry: './src/index.ts',
+  entry: {
+    sample01: './src/hello-world.js',
+    sample02: './src/hello-world.js',
+    sample03: './src/hello-world.js',
+  },
   output: {
-    filename: 'bundle.[contenthash].js',
+    filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/dist',
   },
   resolve: {
-    extensions: ['.ts', '.js'],
+    extensions: ['.ts', '.js', 'scss'],
   },
   module: {
     rules: [
@@ -27,11 +31,11 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
         test: /\.scss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
       {
         test: /\.js$/,
@@ -48,15 +52,31 @@ module.exports = {
         test: /\.ts?$/,
         use: 'ts-loader',
         exclude: /node_modules/,
-        include: [path.resolve(__dirname, 'src')],
+        // include: [path.resolve(__dirname, 'src')],
       },
     ],
   },
   plugins: [
     new TerserPlugin(),
     new MiniCssExtractPlugin({
-      filename: 'style.[contenthash].css',
+      filename: '[name].[contenthash].css',
     }),
     new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      chunks: ['sample01'],
+      filename: 'sample01.html',
+      title: 'Hello world',
+      template: 'src/page-template.hbs',
+      description: 'hello world',
+      minify: 'false',
+    }),
+    new HtmlWebpackPlugin({
+      chunks: ['sample02'],
+      filename: 'sample02.html',
+      title: 'kiwi',
+      template: 'src/page-template.hbs',
+      description: 'Kiwi',
+      minify: 'false',
+    }),
   ],
 };
